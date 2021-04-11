@@ -31,25 +31,29 @@ const SingIn: React.FC = () => {
       try {
         formRef.current?.setErrors({});
 
-        // const schema = Yup.object().shape({
-        //   email: Yup.string()
-        //     .required("E-mail obrigatório")
-        //     .email("Digite um e-mail válido"),
-        //   password: Yup.string().required("Senha obrigatória"),
-        // });
+        const schema = Yup.object().shape({
+          email: Yup.string()
+            .required("E-mail obrigatório")
+            .email("Digite um e-mail válido"),
+          password: Yup.string().required("Senha obrigatória"),
+        });
 
-        // await schema.validate(data, {
-        //   abortEarly: false,
-        // });
+        await schema.validate(data, {
+          abortEarly: false,
+        });
 
         signIn({
           email: data.email,
           password: data.password,
         });
       } catch (err) {
-        const errors = getValidationErrors(err);
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
 
-        formRef.current?.setErrors(errors);
+          formRef.current?.setErrors(errors);
+        }
+        
+
       }
     },
     [signIn]
