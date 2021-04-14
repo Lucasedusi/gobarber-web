@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 
 import Toast from "./Toast";
 
-import { ToastMessage, useToast } from "../../hooks/toast";
+import { ToastMessage } from "../../hooks/toast";
 import { Container } from "./styles";
 
 interface ToastContainerProps {
@@ -11,7 +10,6 @@ interface ToastContainerProps {
 }
 
 const ToastContainer: React.FC<ToastContainerProps> = ({ messages }) => {
-  const { removeToast } = useToast();
 
   return (
     <Container>
